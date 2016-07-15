@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+        function showNotification(message) {
+
+            if (!('Notification' in window)) { //Check if your browser support notification
+              alert('Your browser does not support desktop notification');
+            }
+            else if (Notification.permission === 'granted') {         //Check the notification permisison is granted
+               var notification =  new Notification('exProtocol Notification', { 
+				body: message,
+				icon: 'images/logo.png' });
+
+            }
+            else if (Notification.permission !== 'denied') { // Otherwise, ask the user to enable the notification
+                Notification.requestPermission(function (permission) {
+                    if (permission === 'granted') {
+                           showNotification(message);
+                    }});
+            }
+        }
+        </script>
+    </head>
+<body>
+
+<p>Click the button to display the notification.</p>
+
+<button onclick="showNotification('Welcome to exProtocol. This is your first notification')">Show Notification</button>
+
+</body>
+</html>
